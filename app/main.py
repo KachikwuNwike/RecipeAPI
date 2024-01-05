@@ -3,16 +3,23 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app import models
 
-from .config import settings
 from .database import engine
-from .routers import auth, post, user, vote
+from .routers import (
+    auth,
+    author,
+    category,
+    cuisine,
+    direction,
+    ingredients,
+    recipe,
+    user,
+)
 
-# models.Base.metadata.create_all(bind=engine)
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-origins = ["https://www.google.com", "https://www.youtube.com"]
-# origins = ["*"]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,12 +29,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
-app.include_router(vote.router)
+app.include_router(recipe.router)
+app.include_router(author.router)
+app.include_router(category.router)
+app.include_router(cuisine.router)
+app.include_router(ingredients.router)
+app.include_router(direction.router)
 
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to my api"}
+    return {"message": "Welcome to my Recipe API"}

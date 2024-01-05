@@ -3,3 +3,6 @@ venv/
 .env
 README.txt
 documentation
+tests
+Dockerfile
+docker-compose.yml
