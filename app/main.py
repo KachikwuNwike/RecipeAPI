@@ -41,4 +41,4 @@ app.include_router(direction.router)
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to my Recipe API"}
+    return {"message": "Welcome to Recipe API"}
