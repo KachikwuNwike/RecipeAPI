@@ -13,7 +13,7 @@ router = APIRouter(prefix="/categories", tags=["Categories"])
 @router.get("/", response_model=List[schemas.CategoryOut])
 def get_categories(
     db: Session = Depends(get_db),
-    limit: int = 10,
+    limit: int = 100,
     skip: int = 0,
     search: Optional[str] = "",
 ):

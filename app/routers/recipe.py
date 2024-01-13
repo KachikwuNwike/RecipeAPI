@@ -18,12 +18,15 @@ def get_recipes(
     skip: int = 0,
     search: Optional[str] = "",
     author: Optional[str] = "",
+    cuisine: Optional[str] = "",
 ):
     recipes = (
         db.query(models.Recipe)
         .join(models.Author, models.Author.author_id == models.Recipe.author_id)
+        .join(models.Cuisine, models.Cuisine.cuisine_id == models.Recipe.cuisine_id)
         .filter(models.Recipe.name.ilike(f"%{search}%"))
         .filter(models.Author.name.ilike(f"%{author}%"))
+        .filter(models.Cuisine.name.ilike(f"%{cuisine}%"))
         .limit(limit)
         .offset(skip)
         .all()
